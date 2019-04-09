@@ -17,7 +17,7 @@ For any lesson:
 ## Course 
 * https://egghead.io/courses/maintainable-web-application-testing-with-cypress
 
-## Lessons 
+## Guide 
 * Set up Cypress and TypeScript - Cypress can easily be integrated into any web application in its own dedicated folder. In this lesson we cover how to add cypress with TypeScript support into an existing application without touching any of the existing code. This provides you with a reproducible pattern that you can carry out in your web applications along with a copy pasteable starting point so you don’t need to repeat these steps again and again.
 
 * Command - Execution Separation in Cypress - Cypress works on top of commands. In this lesson we look at command / run separation along with best practices for chaining cypress commands. Cypress commands greatly improve your debugging experience with automatic logs and dom snapshots.
