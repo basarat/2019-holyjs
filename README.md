@@ -9,12 +9,19 @@ Setup the `webapp`:
 * `npm install`
 * `npm start`
 
-For any lesson:
-* cd `01` (e.g)
+Setup `e2e`:
+* cd e2e
 * `npm install`
 * `npm start`
 
-## Plan 
+# Demo 
+* Show the app running 
+  * Add, remove, mark as complete - filter. Preserved on reload.
+* Show the test runner 
+  * Show package.json + deps + scripts, tsconfig.json, plugins/index.js, integration/example.ts
+  * `cy.visit('http://www.google.com')`
+
+## General Idea
 
 * Do a quick walkthrough of setup
 * Show command execution seperation 
