@@ -20,6 +20,10 @@ Setup `e2e`:
 * Show the test runner 
   * Show package.json + deps + scripts, tsconfig.json, plugins/index.js, integration/example.ts
   * `cy.visit('http://www.google.com')`
+* One of the great things you can do with cypress is the ability to mock out the interactions of the appliation from its environment. 
+```
+
+```
 
 ## General Idea
 
