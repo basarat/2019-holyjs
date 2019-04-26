@@ -89,7 +89,7 @@ export const Main: React.SFC<{}> = observer(() => {
 export const Footer: React.SFC<{}> = observer(() => {
   return (
     <footer className={classNames.footer}>
-      <span className={classNames.todoCount}><strong>{appState.todoCount}</strong> {appState.todoCount == 1 ? 'item' : 'items'} left</span>
+      <span className={classNames.todoCount}><strong>{appState.activeCount}</strong> {appState.activeCount == 1 ? 'item' : 'items'} left</span>
       <ul className={classNames.filters}>
         <li>
           <a className={routerState.route == 'all' ? classNames.selected : ''} href={link(routes.all)}>All</a>
@@ -98,7 +98,7 @@ export const Footer: React.SFC<{}> = observer(() => {
         </li>
       </ul>
       {
-        appState.todoCount > 0 &&
+        appState.completedCount > 0 &&
         <button className={classNames.clearCompleted} onClick={() => appState.clearCompleted()}>Clear completed</button>
       }
     </footer>

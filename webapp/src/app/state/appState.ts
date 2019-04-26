@@ -22,8 +22,13 @@ class AppState {
   }
 
   @computed
-  get todoCount() {
+  get activeCount() {
     return this.items.filter(i => i.completed == false).length;
+  }
+
+  @computed
+  get completedCount() {
+    return this.items.filter(i => i.completed).length;
   }
 
   @computed
