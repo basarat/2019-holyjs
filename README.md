@@ -53,6 +53,36 @@ All assertions are done with the `should` command.
 ```
 Notice the autocomplete, and once again touch on our flake resistance notice that its actively waiting for the value to arrive at that state, and we can interact with the ui ourself in this case to show how it passes once the value is actually that.
 
+### Removing backend dependency
+One big concern for flake is how your application interacts with its surroundings. A conventional solution is to add stuff to your application code for alternate execution paths where perhaps you don't call the backend etc. 
+
+Cypress allows you to modify your applications external interactions without you needing to modify your application code. 
+
+Lets write our first test to see it in practice. We already have the application running on 8080 and we can test that. 
+
+```ts
+  cy.visit('http://localhost:8080')
+```
+
+Notice that we start with some todos in there. Its not ideal, instead we should mock out the respose from this `get-all` api. See the response we are getting right now. And lets remove it starting a cypress `server`: 
+
+```ts
+  cy.server()
+    .route('GET', '/api/get-all', { todos: [] })
+  // continue with cy.visit 
+```
+And we can easily move it into its own file `utils/server.ts` file. And then call it in a `before` block in our tests. 
+
+```ts
+import { startServer } from "../utils/server";
+
+before(() => {
+  startServer();
+})
+```
+
+If we play around with the ui we see there are calls to `POST``/add` and `PUT``/set-all`. Lets mock them out with our server as well. 
+
 ### TODO
 
 * One of the great things you can do with cypress is the ability to mock out the interactions of the appliation from its environment - Remove backend dependency when working with the test. 
