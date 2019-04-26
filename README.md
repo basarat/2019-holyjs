@@ -15,11 +15,33 @@ Setup `e2e`:
 * `npm start`
 
 # Demo 
+
+### App 
 * Show the app running 
   * Add, remove, mark as complete - filter. Preserved on reload.
+
+### Test runner 
 * Show the test runner 
   * Show package.json + deps + scripts, tsconfig.json, plugins/index.js, integration/example.ts
   * `cy.visit('http://www.google.com')`
+
+### Flake resistance
+* I've mentioned that cypress tests are flake resistant. One big idea that makes it possible is the command - execution speration. 
+* insert console logs, run the test, see the console logs execute immediately. So its a two step process, one step to run the test, to note down the calls to cypress as commands that need executing. Next the runner goes ahead and runs them. 
+```ts
+    console.log('start')
+    cy.visit('http://www.google.com')
+    console.log('between')
+    cy.get('.gLFyf').type('Hello world')
+    console.log('end')
+```
+* Advantages 
+  * Implicit retries. Notice the retry, and notice the error occurs in the get, not in a `.type` cannot be invoked on undefined. 
+```ts
+cy.get('.somethingelse').type('Hello world')
+```
+  * Second it allows you to write commands in a synchronous fashion even though they execute asynchronously, keeping you away from chaining hell or missed await calls.
+
 * One of the great things you can do with cypress is the ability to mock out the interactions of the appliation from its environment. 
 ```
 
