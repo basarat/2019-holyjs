@@ -2,7 +2,7 @@ import { observable, action, computed } from 'mobx';
 import { FieldState } from 'formstate';
 import { TodoItem } from '../../common/types';
 import { getAll, create, setAll } from '../service/todoService';
-import { routerState } from '../service/routing';
+import { routerState } from './routerState';
 
 
 class AppState {

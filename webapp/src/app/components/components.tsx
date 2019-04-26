@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { FieldState } from 'formstate';
 import { classNames } from '../todomvc/css';
 import { appState } from '../state/appState';
-import { routerState, link, routes } from '../service/routing';
+import { routerState, link, routes } from '../state/routerState';
 
 export const App: React.SFC<{}> = observer((props) => {
   return (
