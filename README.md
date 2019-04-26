@@ -42,19 +42,21 @@ cy.get('.somethingelse').type('Hello world')
 ```
   * Second it allows you to write commands in a synchronous fashion even though they execute asynchronously, keeping you away from chaining hell or missed await calls.
 
-* One of the great things you can do with cypress is the ability to mock out the interactions of the appliation from its environment. 
+Also worth pointing out that the commands follow user interactions. E.g. `.type` inserts text like a user would do it, key by key, this also results in less flake.
+
+### Assertions (`should` command) and its arguments
+All assertions are done with the `should` command. 
+
+```ts
+    cy.visit('http://www.google.com')
+    cy.get('.gLFyf').should('have.value', 'h')
 ```
+Notice the autocomplete, and once again touch on our flake resistance notice that its actively waiting for the value to arrive at that state, and we can interact with the ui ourself in this case to show how it passes once the value is actually that.
 
-```
+### TODO
 
-## General Idea
-
-* Do a quick walkthrough of setup
-* Show command execution seperation 
-* Show implicit assertion and automatic retries 
-* Show how to use assertions 
-
-* Now test the behaviour.
+* One of the great things you can do with cypress is the ability to mock out the interactions of the appliation from its environment - Remove backend dependency when working with the test. 
+* Now convert the behaviours to tests.
 
 ## Guide
 
