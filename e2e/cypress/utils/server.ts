@@ -7,7 +7,16 @@ export function startServer() {
       method: 'POST',
       url: '/api/add',
       response: { id: '' },
+      onRequest(xhr: any) {
+        debugger;
+        xhr.response = {
+          body: {
+            id: (++startId).toString()
+          }
+        }
+      },
       onResponse(xhr: XMLHttpRequest) {
+        debugger;
         xhr.response.body = {
           id: (++startId).toString()
         }
