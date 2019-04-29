@@ -81,7 +81,13 @@ before(() => {
 })
 ```
 
-If we play around with the ui we see there are calls to `POST``/add` and `PUT``/set-all`. Lets mock them out with our server as well. 
+### Init backend dependency
+
+If we play around with the ui we see there are calls to `POST``/add` and `PUT``/set-all`. We could start mocking all of these all well and at that point you will be re-creating your backend. So think about it for a second and you will realize that the whole objective here is to ensure that the application starts in a known good state. So what you really want is `init` the server instead of starting to mock these out. 
+
+```ts
+cy.request('PUT', 'http://localhost:3000/api/set-all', { todos: [] })
+```
 
 ### TODO
 
