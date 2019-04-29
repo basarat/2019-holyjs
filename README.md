@@ -91,8 +91,6 @@ cy.request('PUT', 'http://localhost:3000/api/set-all', { todos: [] })
 
 ### TODO
 
-* Create dynamic match somehow.
-* One of the great things you can do with cypress is the ability to mock out the interactions of the appliation from its environment - Remove backend dependency when working with the test. 
 * Now convert the behaviours to tests.
 
 ## Guide
