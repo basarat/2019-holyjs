@@ -89,6 +89,8 @@ If we play around with the ui we see there are calls to `POST``/add` and `PUT``/
 cy.request('PUT', 'http://localhost:3000/api/set-all', { todos: [] })
 ```
 
+These are true E2E tests. Also equate to the "large" definition used by google https://testing.googleblog.com/2010/12/test-sizes.html
+
 ### TODO
 
 * Now convert the behaviours to tests.
