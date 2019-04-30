@@ -71,12 +71,12 @@ Notice that we start with some todos in there. Its not ideal, instead we should 
     .route('GET', '/api/get-all', { todos: [] })
   // continue with cy.visit 
 ```
-And we can easily move it into its own file `utils/server.ts` file. And then call it in a `before` block in our tests. 
+And we can easily move it into its own file `utils/server.ts` file. And then call it in a `beforeEach` block in our tests. 
 
 ```ts
 import { startServer } from "../utils/server";
 
-before(() => {
+beforeEach(() => {
   startServer();
 })
 ```

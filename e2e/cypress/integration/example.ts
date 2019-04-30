@@ -2,7 +2,7 @@
 
 import { startServer } from "../utils/server";
 
-before(() => {
+beforeEach(() => {
   startServer();
 })
 
