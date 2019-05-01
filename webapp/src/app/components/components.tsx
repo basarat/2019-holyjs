@@ -58,18 +58,22 @@ export const Main: React.SFC<{}> = observer(() => {
             }>
               <div className={classNames.view}>
                 <input
-                  data-test={`toggle-checkbox-${i}`}
+                  data-test={`item-toggle-${i}`}
                   className={classNames.toggle}
                   type="checkbox"
                   checked={item.completed}
                   onChange={() => appState.toggle(item)}
                 />
-                <label onDoubleClick={() => appState.setEditing(item)}>{item.message}</label>
+                <label
+                  data-test={`item-label-${i}`}
+                  onDoubleClick={() => appState.setEditing(item)}>{item.message}</label>
                 <button className={classNames.destroy}
                   onClick={() => appState.destroy(item)} />
               </div>
               {!!appState.editingTodoMessage &&
-                <input className={classNames.edit}
+                <input
+
+                  className={classNames.edit}
                   value={appState.editingTodoMessage.value}
                   onChange={(e) => appState.editingTodoMessage.onChange(e.target.value)}
                   onKeyDown={e => {

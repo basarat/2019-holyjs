@@ -176,6 +176,61 @@ At this point I'm going to move out the `visit` to `beforeEach` as well as that 
 
 ### New todos
 
+```ts
+    /** 
+     * New todos are entered in the input at the top of the app. 
+     * The input element should be focused when the page is loaded, preferably by using the 'autofocus' input attribute. 
+     * Pressing Enter creates the todo, appends it to the todo list, and clears the input. 
+     * Make sure to '.trim()' the input and then check that it's not empty before creating a new todo. 
+     */
+
+    cy.focused().should('have.class', selectors.newTodoInput.substr(1));
+
+    cy.get(selectors.newTodoInput).type('Hello world  ').type('{enter}');
+    cy.get(selectors.todoListItems).last().invoke('text').should('eq', 'Hello world');
+```
+
+### Mark as complete 
+
+```ts
+    /** 
+     * This checkbox toggles all the todos to the same state as itself. 
+     * Make sure to clear the checked state after the "Clear completed" button is clicked. 
+     * The "Mark all as complete" checkbox should also be updated when single todo items are checked/unchecked. Eg. When all the todos are checked it should also get checked.
+     */
+
+    // Initial state
+    cy.get(selectors.toggleAllCheckbox).should('not.be.visible');
+
+    // When nothing is checked 
+    addTodo('Hello');
+    addTodo('World');
+    cy.get(selectors.toggleAllCheckbox).should('not.be.checked');
+
+    // When there is a mix of checked and not checked items
+    cy.get(selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(selectors.toggleAllCheckbox).should('not.be.checked');
+
+    // When they are all checked
+    cy.get(selectors.itemCheckBoxByIndex(1)).click();
+    cy.get(selectors.toggleAllCheckbox).should('be.checked');
+
+    // When toggle all is in checked state and clicked
+    cy.get(selectors.toggleAllCheckbox).click();
+    cy.get(selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
+    cy.get(selectors.itemCheckBoxByIndex(1)).should('not.be.checked');
+    cy.get(selectors.toggleAllCheckbox).should('not.be.checked');
+
+    // When toggle all is not in checked state and clicked
+    cy.get(selectors.toggleAllCheckbox).click();
+    cy.get(selectors.itemCheckBoxByIndex(0)).should('be.checked');
+    cy.get(selectors.itemCheckBoxByIndex(1)).should('be.checked');
+    cy.get(selectors.toggleAllCheckbox).should('be.checked');
+```
+
+### Item 
+* We will do the edit mode later. 
+
 ### TODO
 
 * Now convert the behaviours to tests.

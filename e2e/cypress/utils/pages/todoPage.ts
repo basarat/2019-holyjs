@@ -2,7 +2,8 @@ export const selectors = {
   newTodoInput: '.new-todo',
   todoListItems: '.todo-list label',
   toggleAllCheckbox: '.toggle-all',
-  todoCheckBoxByIndex: (index: number) => `[data-test=toggle-checkbox-${index}]`,
+  itemCheckBoxByIndex: (index: number) => `[data-test=item-toggle-${index}]`,
+  itemLabelByIndex: (index: number) => `[data-test=item-label-${index}]`,
 
   all: '[data-test=all]',
   active: '[data-test=active]',

@@ -45,33 +45,43 @@ describe('todo mvc', () => {
     cy.get(selectors.toggleAllCheckbox).should('not.be.checked');
 
     // When there is a mix of checked and not checked items
-    cy.get(selectors.todoCheckBoxByIndex(0)).click();
+    cy.get(selectors.itemCheckBoxByIndex(0)).click();
     cy.get(selectors.toggleAllCheckbox).should('not.be.checked');
 
     // When they are all checked
-    cy.get(selectors.todoCheckBoxByIndex(1)).click();
+    cy.get(selectors.itemCheckBoxByIndex(1)).click();
     cy.get(selectors.toggleAllCheckbox).should('be.checked');
 
     // When toggle all is in checked state and clicked
     cy.get(selectors.toggleAllCheckbox).click();
-    cy.get(selectors.todoCheckBoxByIndex(0)).should('not.be.checked');
-    cy.get(selectors.todoCheckBoxByIndex(1)).should('not.be.checked');
+    cy.get(selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
+    cy.get(selectors.itemCheckBoxByIndex(1)).should('not.be.checked');
     cy.get(selectors.toggleAllCheckbox).should('not.be.checked');
 
     // When toggle all is not in checked state and clicked
     cy.get(selectors.toggleAllCheckbox).click();
-    cy.get(selectors.todoCheckBoxByIndex(0)).should('be.checked');
-    cy.get(selectors.todoCheckBoxByIndex(1)).should('be.checked');
+    cy.get(selectors.itemCheckBoxByIndex(0)).should('be.checked');
+    cy.get(selectors.itemCheckBoxByIndex(1)).should('be.checked');
     cy.get(selectors.toggleAllCheckbox).should('be.checked');
   });
 
-  it('Item', () => {
+  it.only('Item', () => {
     /** 
      * A todo item has three possible interactions:
      * 1. Clicking the checkbox marks the todo as complete by updating its 'completed' value and toggling the class 'completed' on its parent '<li>'
      * 2. Double-clicking the '<label>' activates editing mode, by toggling the '.editing' class on its '<li>'
      * 3. Hovering over the todo shows the remove button ('.destroy')
      */
+
+    
+    // Checked state
+    addTodo('Hello World');
+    cy.get(selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
+    cy.get(selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(selectors.itemCheckBoxByIndex(0)).should('be.checked');
+
+    // Destruction
+    // TODO 
   });
 
 });
