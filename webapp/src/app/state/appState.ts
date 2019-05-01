@@ -47,7 +47,7 @@ class AppState {
     this.items.push({
       id,
       completed: false,
-      message: this.current.value
+      message: this.current.value.trim()
     });
     this.current.onChange('');
   }
@@ -96,7 +96,7 @@ class AppState {
   @action
   async submitEditing() {
     const todo = this.items.find(i => i.id === this.editingId);
-    todo.message = this.editingTodoMessage.value;
+    todo.message = this.editingTodoMessage.value.trim();
     setAll({ todos: this.items });
     this.cancelEditing();
   }
