@@ -1,4 +1,4 @@
-const selectors = {
+export const selectors = {
   newTodoInput: '.new-todo',
   todoListItems: '.todo-list label',
 

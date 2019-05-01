@@ -1,29 +1,37 @@
 /// <reference types="cypress"/>
 
 import { startServer } from "../utils/server";
-import { addTodo, visit } from "../utils/pages/todoPage";
+import { addTodo, visit, selectors } from "../utils/pages/todoPage";
 
 beforeEach(() => {
   startServer();
+  visit();
 })
 
 describe('todo mvc', () => {
   it('No todos', () => {
-    visit();
     /** When there are no todos, '#main' and '#footer' should be hidden. */
     cy.get('#main').should('not.be.visible');
     cy.get('#footer').should('not.be.visible');
   });
+
+  it('New todo', () => {
+    /** 
+     * New todos are entered in the input at the top of the app. 
+     * The input element should be focused when the page is loaded, preferably by using the 'autofocus' input attribute. 
+     * Pressing Enter creates the todo, appends it to the todo list, and clears the input. 
+     * Make sure to '.trim()' the input and then check that it's not empty before creating a new todo. 
+     */
+
+    cy.focused().should('have.class', selectors.newTodoInput.substr(1));
+
+    cy.get(selectors.newTodoInput).type('Hello world  ').type('{enter}');
+    cy.get(selectors.todoListItems).contains('Hello world');
+
+  });
 });
 
 `
-### No todos
-
-When there are no todos, '#main' and '#footer' should be hidden.
-
-### New todo
-
-New todos are entered in the input at the top of the app. The input element should be focused when the page is loaded, preferably by using the 'autofocus' input attribute. Pressing Enter creates the todo, appends it to the todo list, and clears the input. Make sure to '.trim()' the input and then check that it's not empty before creating a new todo.
 
 ### Mark all as complete
 
