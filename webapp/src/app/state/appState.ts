@@ -43,7 +43,7 @@ class AppState {
   @action
   async addCurrentItem() {
     if (this.current.value.trim() === '') return;
-    const { id } = await create({ message: this.current.value });
+    const { id } = await create({ message: this.current.value.trim() });
     this.items.push({
       id,
       completed: false,
