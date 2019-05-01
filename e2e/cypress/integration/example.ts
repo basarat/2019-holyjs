@@ -65,13 +65,18 @@ describe('todo mvc', () => {
     cy.get(selectors.toggleAllCheckbox).should('be.checked');
   });
 
+  it('Item', () => {
+    /** 
+     * A todo item has three possible interactions:
+     * 1. Clicking the checkbox marks the todo as complete by updating its 'completed' value and toggling the class 'completed' on its parent '<li>'
+     * 2. Double-clicking the '<label>' activates editing mode, by toggling the '.editing' class on its '<li>'
+     * 3. Hovering over the todo shows the remove button ('.destroy')
+     */
+  });
+
 });
 
 `
-
-### Mark all as complete
-
-This checkbox toggles all the todos to the same state as itself. Make sure to clear the checked state after the "Clear completed" button is clicked. The "Mark all as complete" checkbox should also be updated when single todo items are checked/unchecked. Eg. When all the todos are checked it should also get checked.
 
 ### Item
 
