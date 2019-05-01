@@ -7,6 +7,10 @@ const selectors = {
   completed: '[data-test=completed]',
 }
 
+export const visit = () => {
+  cy.visit('http://localhost:8080');
+}
+
 export const addTodo = (text: string) => {
   cy.get(selectors.newTodoInput).type(text).type('{enter}');
 }
