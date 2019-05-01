@@ -28,6 +28,18 @@ describe('todo mvc', () => {
     cy.get(selectors.newTodoInput).type('Hello world  ').type('{enter}');
     cy.get(selectors.todoListItems).last().invoke('text').should('eq', 'Hello world');
   });
+
+  it('Mark all as complete', () => {
+    /** 
+     * This checkbox toggles all the todos to the same state as itself. 
+     * Make sure to clear the checked state after the "Clear completed" button is clicked. 
+     * The "Mark all as complete" checkbox should also be updated when single todo items are checked/unchecked. Eg. When all the todos are checked it should also get checked.
+     */
+
+    cy.get(selectors.newTodoInput).type('Hello world  ').type('{enter}');
+    cy.get(selectors.todoListItems).last().invoke('text').should('eq', 'Hello world');
+  });
+
 });
 
 `
