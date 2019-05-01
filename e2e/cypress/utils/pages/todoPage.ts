@@ -1,6 +1,7 @@
 export const selectors = {
   newTodoInput: '.new-todo',
   todoListItems: '.todo-list label',
+  toggleAllCheckbox : '.toggle-all',
 
   all: '[data-test=all]',
   active: '[data-test=active]',

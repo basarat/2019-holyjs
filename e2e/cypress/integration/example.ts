@@ -36,8 +36,9 @@ describe('todo mvc', () => {
      * The "Mark all as complete" checkbox should also be updated when single todo items are checked/unchecked. Eg. When all the todos are checked it should also get checked.
      */
 
-    cy.get(selectors.newTodoInput).type('Hello world  ').type('{enter}');
-    cy.get(selectors.todoListItems).last().invoke('text').should('eq', 'Hello world');
+    addTodo('Hello');
+    addTodo('World');
+    cy.get('.view').contains('Hello').click();
   });
 
 });
