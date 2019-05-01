@@ -179,4 +179,5 @@ At this point I'm going to move out the `visit` to `beforeEach` as well as that 
 ### TODO
 
 * Now convert the behaviours to tests.
-* Seperate behaviurs into `describe` and `it` section. 
+* Seperate behaviours into `describe` and `it` section. 
+* Setup to run on travis.

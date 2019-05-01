@@ -48,7 +48,7 @@ export const Main: React.SFC<{}> = observer(() => {
       />
       <label htmlFor={classNames.toggleAll}>Mark all as complete</label>
       <ul className={classNames.todoList}>
-        {appState.visibleList.map(item => {
+        {appState.visibleList.map((item, i) => {
           return (
             <li key={item.id} className={
               item.id == appState.editingId
@@ -57,7 +57,10 @@ export const Main: React.SFC<{}> = observer(() => {
                   ? classNames.completed : ''
             }>
               <div className={classNames.view}>
-                <input className={classNames.toggle} type="checkbox"
+                <input
+                  data-test={`toggle-checkbox-${i}`}
+                  className={classNames.toggle}
+                  type="checkbox"
                   checked={item.completed}
                   onChange={() => appState.toggle(item)}
                 />
