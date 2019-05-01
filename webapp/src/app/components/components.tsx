@@ -92,9 +92,9 @@ export const Footer: React.SFC<{}> = observer(() => {
       <span className={classNames.todoCount}><strong>{appState.activeCount}</strong> {appState.activeCount == 1 ? 'item' : 'items'} left</span>
       <ul className={classNames.filters}>
         <li>
-          <a className={routerState.route == 'all' ? classNames.selected : ''} href={link(routes.all)}>All</a>
-          <a className={routerState.route == 'active' ? classNames.selected : ''} href={link(routes.active)}>Active</a>
-          <a className={routerState.route == 'completed' ? classNames.selected : ''} href={link(routes.completed)}>Completed</a>
+          <a data-test="all" className={routerState.route == 'all' ? classNames.selected : ''} href={link(routes.all)}>All</a>
+          <a data-test="active" className={routerState.route == 'active' ? classNames.selected : ''} href={link(routes.active)}>Active</a>
+          <a data-test="completed" className={routerState.route == 'completed' ? classNames.selected : ''} href={link(routes.completed)}>Completed</a>
         </li>
       </ul>
       {

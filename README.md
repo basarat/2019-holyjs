@@ -91,6 +91,21 @@ cy.request('PUT', 'http://localhost:3000/api/set-all', { todos: [] })
 
 These are true E2E tests. Also equate to the "large" definition used by google https://testing.googleblog.com/2010/12/test-sizes.html
 
+### Creating page objects 
+* `cypress/utils/page/todoPage`
+
+* create selectors 
+* create actions
+
+* add to test to show 
+```ts
+  addTodo('one');
+  addTodo('two');
+  
+  cy.contains('one');
+  cy.contains('two');
+```
+
 ### TODO
 
 * Now convert the behaviours to tests.
