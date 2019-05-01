@@ -26,8 +26,7 @@ describe('todo mvc', () => {
     cy.focused().should('have.class', selectors.newTodoInput.substr(1));
 
     cy.get(selectors.newTodoInput).type('Hello world  ').type('{enter}');
-    cy.get(selectors.todoListItems).contains('Hello world');
-
+    cy.get(selectors.todoListItems).last().invoke('text').should('eq', 'Hello world');
   });
 });
 

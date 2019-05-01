@@ -172,6 +172,8 @@ Routing is required for all implementations. If supported by the framework, use 
   });
 ```
 
+At this point I'm going to move out the `visit` to `beforeEach` as well as that is exactly what it is for.
+
 ### TODO
 
 * Now convert the behaviours to tests.
