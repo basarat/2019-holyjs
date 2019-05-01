@@ -42,7 +42,10 @@ export const Header: React.SFC<{
 export const Main: React.SFC<{}> = observer(() => {
   return (
     <section className={classNames.main}>
-      <input id={classNames.toggleAll} className={classNames.toggleAll} type="checkbox" />
+      <input id={classNames.toggleAll} className={classNames.toggleAll} type="checkbox"
+        checked={appState.everythingIsCompleted}
+        onChange={() => appState.toggleCompleteEverything()}
+      />
       <label htmlFor={classNames.toggleAll}>Mark all as complete</label>
       <ul className={classNames.todoList}>
         {appState.visibleList.map(item => {

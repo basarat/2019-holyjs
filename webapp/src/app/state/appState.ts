@@ -100,6 +100,22 @@ class AppState {
     setAll({ todos: this.items });
     this.cancelEditing();
   }
+
+  @computed
+  get everythingIsCompleted() {
+    return !!this.items.length && this.items.every(x => x.completed === true);
+  }
+
+  @action
+  toggleCompleteEverything() {
+    if (this.everythingIsCompleted) {
+      this.items.forEach(i => i.completed = false);
+    }
+    else {
+      this.items.forEach(i => i.completed = true);
+    }
+    setAll({ todos: this.items });
+  }
 }
 
 export const appState = new AppState();
