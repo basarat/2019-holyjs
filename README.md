@@ -106,9 +106,17 @@ These are true E2E tests. Also equate to the "large" definition used by google h
   cy.contains('two');
 ```
 
+* create and use `visit`.
+```ts
+export const visit = () => {
+  cy.visit('http://localhost:8080');
+}
+```
+
 ### Spec 
 
-```
+```js
+`
 ### No todos
 
 When there are no todos, '#main' and '#footer' should be hidden.
@@ -150,6 +158,18 @@ Your app should dynamically persist the todos to localStorage. If the framework 
 ### Routing
 
 Routing is required for all implementations. If supported by the framework, use its built-in capabilities. Otherwise, use the  [Flatiron Director](https://github.com/flatiron/director) routing library located in the '/assets' folder. The following routes should be implemented: '#/' (all - default), '#/active' and '#/completed' ('#!/' is also allowed). When the route changes, the todo list should be filtered on a model level and the 'selected' class on the filter links should be toggled. When an item is updated while in a filtered state, it should be updated accordingly. E.g. if the filter is 'Active' and the item is checked, it should be hidden. Make sure the active filter is persisted on reload.
+`
+```
+
+### No todos 
+
+```ts
+  it('No todos', () => {
+    visit();
+    /** When there are no todos, '#main' and '#footer' should be hidden. */
+    cy.get('#main').should('not.be.visible');
+    cy.get('#footer').should('not.be.visible');
+  });
 ```
 
 ### TODO
