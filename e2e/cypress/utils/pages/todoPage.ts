@@ -1,6 +1,5 @@
 export const selectors = {
   newTodoInput: '.new-todo',
-  todoListItems: '.todo-list label',
   toggleAllCheckbox: '.toggle-all',
   
   itemCheckBoxByIndex: (index: number) => `[data-test=item-toggle-${index}]`,
@@ -10,6 +9,7 @@ export const selectors = {
 
   todoCount: '.todo-count',
   clearCompleted: '.clear-completed',
+  todoListItems: '.todo-list label',
 
   all: '[data-test=all]',
   active: '[data-test=active]',
@@ -22,4 +22,8 @@ export const visit = () => {
 
 export const addTodo = (text: string) => {
   cy.get(selectors.newTodoInput).type(text).type('{enter}');
+}
+
+export const getAllTodos = () => {
+  return cy.get(selectors.todoListItems).each($item => $item.text());
 }

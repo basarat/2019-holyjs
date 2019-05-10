@@ -26,7 +26,7 @@ describe('todo mvc', () => {
     cy.focused().should('have.class', selectors.newTodoInput.substr(1));
 
     cy.get(selectors.newTodoInput).type('Hello world  ').type('{enter}');
-    cy.get(selectors.todoListItems).last().invoke('text').should('eq', 'Hello world');
+    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'Hello world');
   });
 
   it('Mark all as complete', () => {
@@ -144,7 +144,7 @@ describe('todo mvc', () => {
     cy.get(selectors.todoCount).should('have.text', '0 items left');
   });
 
-  it.only('Clear completed button', () => {
+  it('Clear completed button', () => {
     /** 
      * Should be hidden when there are no completed todos.
      * Removes completed todos when clicked. 
@@ -153,14 +153,20 @@ describe('todo mvc', () => {
     addTodo('Again');
     cy.get(selectors.itemCheckBoxByIndex(0)).click();
     cy.get(selectors.clearCompleted).should('be.visible');
-    
+
     cy.get(selectors.clearCompleted).click();
     cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
   });
+
+  it('Routing', () => {
+    /** 
+     * The following routes should be implemented: 
+     * '#/' (all - default), '#/active' and '#/completed'. 
+     * 
+     * When the route changes, the todo list should be filtered on a model level and the 'selected' class on the filter links should be toggled.
+     * 
+     * When an item is updated while in a filtered state, it should be updated accordingly. E.g. if the filter is 'Active' and the item is checked, it should be hidden.  
+     */
+    
+  });
 });
-
-`
-
-### Routing
-Routing is required for all implementations. If supported by the framework, use its built-in capabilities. Otherwise, use the  [Flatiron Director](https://github.com/flatiron/director) routing library located in the '/assets' folder. The following routes should be implemented: '#/' (all - default), '#/active' and '#/completed' ('#!/' is also allowed). When the route changes, the todo list should be filtered on a model level and the 'selected' class on the filter links should be toggled. When an item is updated while in a filtered state, it should be updated accordingly. E.g. if the filter is 'Active' and the item is checked, it should be hidden. Make sure the active filter is persisted on reload.
-`
