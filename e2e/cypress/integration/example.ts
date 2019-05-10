@@ -65,12 +65,11 @@ describe('todo mvc', () => {
     cy.get(selectors.toggleAllCheckbox).should('be.checked');
   });
 
-  it.only('Item', () => {
+  it('Item', () => {
     /** 
      * A todo item has three possible interactions:
      * 1. Clicking the checkbox marks the todo as complete by updating its 'completed' value and toggling the class 'completed' on its parent '<li>'
-     * 2. Double-clicking the '<label>' activates editing mode, by toggling the '.editing' class on its '<li>'
-     * 3. Clicking the remove button should remove it item
+     * 2. Clicking the remove button should remove it item
      */
 
     
@@ -86,13 +85,27 @@ describe('todo mvc', () => {
     cy.get('Hello World').should('not.exist');
   });
 
+  it.only('Editing', () => {
+    /** 
+     * Double-clicking the '<label>' activates editing mode, by toggling the '.editing' class on its '<li>'
+     * 
+     * When editing mode is activated it will hide the other controls and bring forward an input that contains the todo title, which should be focused ('.focus()'). 
+     * 
+     * The edit should be saved on both blur and enter, and the 'editing' class should be removed. 
+     * 
+     * Make sure to '.trim()' the input and then check that it's not empty. If it's empty the todo should instead be destroyed. 
+     * 
+     * If escape is pressed during the edit, the edit state should be left and any changes be discarded.
+     */
+
+    
+    // Checked state
+    addTodo('Hello World');
+    cy.get(selectors.itemLabelByIndex(0)).dblclick();
+  });
 });
 
 `
-
-### Editing
-
-When editing mode is activated it will hide the other controls and bring forward an input that contains the todo title, which should be focused ('.focus()'). The edit should be saved on both blur and enter, and the 'editing' class should be removed. Make sure to '.trim()' the input and then check that it's not empty. If it's empty the todo should instead be destroyed. If escape is pressed during the edit, the edit state should be left and any changes be discarded.
 
 ### Counter
 
