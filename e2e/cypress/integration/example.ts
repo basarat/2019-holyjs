@@ -70,7 +70,7 @@ describe('todo mvc', () => {
      * A todo item has three possible interactions:
      * 1. Clicking the checkbox marks the todo as complete by updating its 'completed' value and toggling the class 'completed' on its parent '<li>'
      * 2. Double-clicking the '<label>' activates editing mode, by toggling the '.editing' class on its '<li>'
-     * 3. Hovering over the todo shows the remove button ('.destroy')
+     * 3. Clicking the remove button should remove it item
      */
 
     
@@ -80,23 +80,15 @@ describe('todo mvc', () => {
     cy.get(selectors.itemCheckBoxByIndex(0)).click();
     cy.get(selectors.itemCheckBoxByIndex(0)).should('be.checked');
 
+
     // Destruction
-    // TODO 
+    cy.get(selectors.itemDestroyByIndex(0)).invoke('show').click();
+    cy.get('Hello World').should('not.exist');
   });
 
 });
 
 `
-
-### Item
-
-A todo item has three possible interactions:
-
-1. Clicking the checkbox marks the todo as complete by updating its 'completed' value and toggling the class 'completed' on its parent '<li>'
-
-2. Double-clicking the '<label>' activates editing mode, by toggling the '.editing' class on its '<li>'
-
-3. Hovering over the todo shows the remove button ('.destroy')
 
 ### Editing
 

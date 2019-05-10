@@ -68,6 +68,7 @@ export const Main: React.SFC<{}> = observer(() => {
                   data-test={`item-label-${i}`}
                   onDoubleClick={() => appState.setEditing(item)}>{item.message}</label>
                 <button className={classNames.destroy}
+                  data-test={`item-destroy-${i}`}
                   onClick={() => appState.destroy(item)} />
               </div>
               {!!appState.editingTodoMessage &&
