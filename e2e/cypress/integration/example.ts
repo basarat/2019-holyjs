@@ -158,7 +158,7 @@ describe('todo mvc', () => {
     cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
   });
 
-  it.only('Routing', () => {
+  it('Routing', () => {
     /** 
      * The following routes should be implemented: 
      * '#/' (all - default), '#/active' and '#/completed'. 
