@@ -85,7 +85,7 @@ describe('todo mvc', () => {
     cy.get('Hello World').should('not.exist');
   });
 
-  it.only('Editing', () => {
+  it('Editing', () => {
     /** 
      * Double-clicking the '<label>' activates editing mode
      * 
@@ -129,13 +129,23 @@ describe('todo mvc', () => {
     cy.get(selectors.itemEditByIndex(0)).clear().type('{enter}');
     cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
   });
+
+  it.only('Counter', () => {
+    /** 
+     * Displays the number of active todos in a pluralized form. Make sure to pluralize the 'item' word correctly: '0 items', '1 item', '2 items'. Example: **2** items left
+     */
+    addTodo('Hello World');
+    cy.get(selectors.todoCount).should('have.text', '1 item left');
+
+    addTodo('Again');
+    cy.get(selectors.todoCount).should('have.text', '2 items left');
+
+    cy.get(selectors.toggleAllCheckbox).click();
+    cy.get(selectors.todoCount).should('have.text', '0 items left');
+  });
 });
 
 `
-
-### Counter
-
-Displays the number of active todos in a pluralized form. Make sure the number is wrapped by a '<strong>' tag. Also make sure to pluralize the 'item' word correctly: '0 items', '1 item', '2 items'. Example: **2** items left
 
 ### Clear completed button
 

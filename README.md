@@ -235,5 +235,6 @@ At this point I'm going to move out the `visit` to `beforeEach` as well as that 
 
 * Now convert the behaviours to tests.
 * Seperate behaviours into `describe` and `it` section. 
+* Definitely setup item editing tests to be in a list  
 * Setup to run on travis.
 * Talk about ordering the tests, e.g. moving the item test *before* others as there is a dependency there.
