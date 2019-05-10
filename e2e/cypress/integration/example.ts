@@ -1,7 +1,7 @@
 /// <reference types="cypress"/>
 
 import { startServer } from "../utils/server";
-import { addTodo, visit, selectors } from "../utils/pages/todoPage";
+import { addTodo, visit, selectors, getAllTodos } from "../utils/pages/todoPage";
 
 beforeEach(() => {
   startServer();
@@ -158,7 +158,7 @@ describe('todo mvc', () => {
     cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
   });
 
-  it('Routing', () => {
+  it.only('Routing', () => {
     /** 
      * The following routes should be implemented: 
      * '#/' (all - default), '#/active' and '#/completed'. 
@@ -167,6 +167,26 @@ describe('todo mvc', () => {
      * 
      * When an item is updated while in a filtered state, it should be updated accordingly. E.g. if the filter is 'Active' and the item is checked, it should be hidden.  
      */
-    
+    addTodo('Completed');
+    cy.get(selectors.itemCheckBoxByIndex(0)).click();
+    addTodo('InProgress');
+
+
+    /** All */
+    cy.get(selectors.all).should('have.class', 'selected');
+
+    /** Active */
+    cy.visit('#/active');
+    cy.get(selectors.active).should('have.class', 'selected');
+    getAllTodos().should('deep.equal', ['InProgress']);
+
+    /** Completed */
+    cy.visit('#/completed');
+    cy.get(selectors.completed).should('have.class', 'selected');
+    getAllTodos().should('deep.equal', ['Completed']);
+
+    /** Should disappear if no longer matches active filter */
+    cy.get(selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
   });
 });

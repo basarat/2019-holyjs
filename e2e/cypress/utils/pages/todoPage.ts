@@ -1,7 +1,7 @@
 export const selectors = {
   newTodoInput: '.new-todo',
   toggleAllCheckbox: '.toggle-all',
-  
+
   itemCheckBoxByIndex: (index: number) => `[data-test=item-toggle-${index}]`,
   itemLabelByIndex: (index: number) => `[data-test=item-label-${index}]`,
   itemDestroyByIndex: (index: number) => `[data-test=item-destroy-${index}]`,
@@ -25,5 +25,12 @@ export const addTodo = (text: string) => {
 }
 
 export const getAllTodos = () => {
-  return cy.get(selectors.todoListItems).each($item => $item.text());
+  return cy.get(selectors.todoListItems)
+    .then($items => {
+      const text: string[] = [];
+      $items.each((_i, item) => {
+        text.push(Cypress.$(item).text());
+      });
+      return text;
+    });
 }
