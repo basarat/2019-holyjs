@@ -5,6 +5,7 @@ export const selectors = {
   itemCheckBoxByIndex: (index: number) => `[data-test=item-toggle-${index}]`,
   itemLabelByIndex: (index: number) => `[data-test=item-label-${index}]`,
   itemDestroyByIndex: (index: number) => `[data-test=item-destroy-${index}]`,
+  itemEditByIndex: (index: number) => `[data-test=item-edit-${index}]`,
 
   all: '[data-test=all]',
   active: '[data-test=active]',

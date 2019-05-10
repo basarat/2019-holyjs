@@ -72,7 +72,7 @@ describe('todo mvc', () => {
      * 2. Clicking the remove button should remove it item
      */
 
-    
+
     // Checked state
     addTodo('Hello World');
     cy.get(selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
@@ -87,9 +87,7 @@ describe('todo mvc', () => {
 
   it.only('Editing', () => {
     /** 
-     * Double-clicking the '<label>' activates editing mode, by toggling the '.editing' class on its '<li>'
-     * 
-     * When editing mode is activated it will hide the other controls and bring forward an input that contains the todo title, which should be focused ('.focus()'). 
+     * Double-clicking the '<label>' activates editing mode
      * 
      * The edit should be saved on both blur and enter, and the 'editing' class should be removed. 
      * 
@@ -98,10 +96,38 @@ describe('todo mvc', () => {
      * If escape is pressed during the edit, the edit state should be left and any changes be discarded.
      */
 
-    
-    // Checked state
-    addTodo('Hello World');
+    addTodo('Hello');
+
+    /** Should enter and exit edit mode */
     cy.get(selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(selectors.itemEditByIndex(0)).should('exist').blur().should('not.exist');
+
+    /** Should commit on blur */
+    cy.get(selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(selectors.itemEditByIndex(0)).clear().type('World').blur();
+    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'World');
+
+    /** Should commit on enter */
+    cy.get(selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(selectors.itemEditByIndex(0)).clear().type('Again{enter}');
+    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'Again');
+
+    /** Should not commit on escape */
+    cy.get(selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(selectors.itemEditByIndex(0)).clear().type('Hello{enter}')
+    cy.get(selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(selectors.itemEditByIndex(0)).clear().type('Ignored{esc}');
+    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'Hello');
+
+    /** Should commit without spaces */
+    cy.get(selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(selectors.itemEditByIndex(0)).clear().type(' Hello ').blur();
+    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'Hello');
+
+    /** Should destroy on empty commit */
+    cy.get(selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(selectors.itemEditByIndex(0)).clear().type('{enter}');
+    cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
   });
 });
 

@@ -73,7 +73,7 @@ export const Main: React.SFC<{}> = observer(() => {
               </div>
               {!!appState.editingTodoMessage &&
                 <input
-
+                  data-test={`item-edit-${i}`}
                   className={classNames.edit}
                   value={appState.editingTodoMessage.value}
                   onChange={(e) => appState.editingTodoMessage.onChange(e.target.value)}
@@ -85,7 +85,7 @@ export const Main: React.SFC<{}> = observer(() => {
                       appState.cancelEditing();
                     }
                   }}
-                  onBlur={() => appState.cancelEditing()}
+                  onBlur={() => appState.submitEditing()}
                   autoFocus={true}
                 />
               }

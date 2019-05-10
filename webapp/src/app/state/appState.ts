@@ -97,6 +97,9 @@ class AppState {
   async submitEditing() {
     const todo = this.items.find(i => i.id === this.editingId);
     todo.message = this.editingTodoMessage.value.trim();
+    if (todo.message === '') {
+      this.items = this.items.filter(item => item.id !== todo.id);
+    }
     setAll({ todos: this.items });
     this.cancelEditing();
   }
