@@ -130,7 +130,7 @@ describe('todo mvc', () => {
     cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
   });
 
-  it.only('Counter', () => {
+  it('Counter', () => {
     /** 
      * Displays the number of active todos in a pluralized form. Make sure to pluralize the 'item' word correctly: '0 items', '1 item', '2 items'. Example: **2** items left
      */
@@ -143,13 +143,23 @@ describe('todo mvc', () => {
     cy.get(selectors.toggleAllCheckbox).click();
     cy.get(selectors.todoCount).should('have.text', '0 items left');
   });
+
+  it.only('Clear completed button', () => {
+    /** 
+     * Should be hidden when there are no completed todos.
+     * Removes completed todos when clicked. 
+     */
+    cy.get(selectors.clearCompleted).should('not.exist');
+    addTodo('Again');
+    cy.get(selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(selectors.clearCompleted).should('be.visible');
+    
+    cy.get(selectors.clearCompleted).click();
+    cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
+  });
 });
 
 `
-
-### Clear completed button
-Removes completed todos when clicked. Should be hidden when there are no completed todos.
-
 
 ### Routing
 Routing is required for all implementations. If supported by the framework, use its built-in capabilities. Otherwise, use the  [Flatiron Director](https://github.com/flatiron/director) routing library located in the '/assets' folder. The following routes should be implemented: '#/' (all - default), '#/active' and '#/completed' ('#!/' is also allowed). When the route changes, the todo list should be filtered on a model level and the 'selected' class on the filter links should be toggled. When an item is updated while in a filtered state, it should be updated accordingly. E.g. if the filter is 'Active' and the item is checked, it should be hidden. Make sure the active filter is persisted on reload.

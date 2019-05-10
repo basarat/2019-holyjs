@@ -9,6 +9,7 @@ export const selectors = {
   itemEditByIndex: (index: number) => `[data-test=item-edit-${index}]`,
 
   todoCount: '.todo-count',
+  clearCompleted: '.clear-completed',
 
   all: '[data-test=all]',
   active: '[data-test=active]',
