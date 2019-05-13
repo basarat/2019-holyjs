@@ -59,7 +59,7 @@ This checkbox toggles all the todos to the same state as itself.
 - When clicked, If it is not checked, it checks all todos.
 - When clicked, If it is checked, it unchecks all todos.
 `
-describe.only('Mark all as complete', () => {
+describe('Mark all as complete', () => {
   it('should not be visible when there are no todos', () => {
     cy.get(page.selectors.toggleAllCheckbox).should('not.be.visible');
   });
@@ -95,31 +95,36 @@ describe.only('Mark all as complete', () => {
     cy.get(page.selectors.itemCheckBoxByIndex(1)).should('not.be.checked');
     cy.get(page.selectors.toggleAllCheckbox).should('not.be.checked');
   });
-  
+});
+
+`
+# Item
+- Starts of unchecked
+- Clicking the checkbox toggles the todo active/complete
+- Clicking the remove button should remove it item
+`
+
+describe('Item', () => {
+  it('Starts of unchecked', () => {
+    page.addTodo('Hello World');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
+  });
+  it('Clicking the checkbox toggles the todo active/complete', () => {
+    page.addTodo('Hello World');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('be.checked');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
+  });
+  it('Clicking the remove button should remove it item', () => {
+    page.addTodo('Hello world');
+    cy.get(page.selectors.itemDestroyByIndex(0)).invoke('show').click();
+    cy.get('Hello World').should('not.exist');
+  });
 });
 
 
 describe('todo mvc', () => {
-  it('Item', () => {
-    /** 
-     * A todo item has three possible interactions:
-     * 1. Clicking the checkbox marks the todo as complete by updating its 'completed' value and toggling the class 'completed' on its parent '<li>'
-     * 2. Clicking the remove button should remove it item
-     */
-
-
-    // Checked state
-    page.addTodo('Hello World');
-    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
-    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
-    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('be.checked');
-
-
-    // Destruction
-    cy.get(page.selectors.itemDestroyByIndex(0)).invoke('show').click();
-    cy.get('Hello World').should('not.exist');
-  });
-
   it('Editing', () => {
     /** 
      * Double-clicking the '<label>' activates editing mode
