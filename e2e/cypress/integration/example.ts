@@ -123,53 +123,73 @@ describe('Item', () => {
   });
 });
 
-
-describe('todo mvc', () => {
-  it('Editing', () => {
-    /** 
-     * Double-clicking the '<label>' activates editing mode
-     * 
-     * The edit should be saved on both blur and enter, and the 'editing' class should be removed. 
-     * 
-     * Make sure to '.trim()' the input and then check that it's not empty. If it's empty the todo should instead be destroyed. 
-     * 
-     * If escape is pressed during the edit, the edit state should be left and any changes be discarded.
-     */
-
+`
+# Edit item
+- Double-clicking the todo label activates editing mode
+- The edit mode should exit on enter, blur and escape
+- Enter results in a commit
+- Blur results in a commit
+- The *commit* is done after trim
+- If the trim results in an empty value, the commit should destroy the item
+- Escape does not result in a commit
+`
+describe('Edit item', () => {
+  it('Double-clicking the todo label activates editing mode', () => {
+    page.addTodo('Hello');
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).should('exist');
+  });
+  it('The edit mode should exit on enter, blur and escape', () => {
     page.addTodo('Hello');
 
-    /** Should enter and exit edit mode */
     cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(page.selectors.itemEditByIndex(0)).should('exist').blur().should('not.exist');
+    cy.get(page.selectors.itemEditByIndex(0)).type('{enter}').should('not.exist');
 
-    /** Should commit on blur */
     cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(page.selectors.itemEditByIndex(0)).clear().type('World').blur();
-    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'World');
+    cy.get(page.selectors.itemEditByIndex(0)).blur().should('not.exist');
 
-    /** Should commit on enter */
     cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(page.selectors.itemEditByIndex(0)).clear().type('Again{enter}');
-    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Again');
+    cy.get(page.selectors.itemEditByIndex(0)).type('{esc}').should('not.exist');
+  });
+  it('Enter results in a commit', () => {
+    page.addTodo('Hello');
 
-    /** Should not commit on escape */
     cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(page.selectors.itemEditByIndex(0)).clear().type('Hello{enter}')
-    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(page.selectors.itemEditByIndex(0)).clear().type('Ignored{esc}');
-    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello');
+    cy.get(page.selectors.itemEditByIndex(0)).type(' World{enter}');
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello World');
+  });
+  it('Blur results in a commit', () => {
+    page.addTodo('Hello');
 
-    /** Should commit without spaces */
     cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(page.selectors.itemEditByIndex(0)).clear().type(' Hello ').blur();
-    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello');
+    cy.get(page.selectors.itemEditByIndex(0)).type(' World').blur();
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello World');
+  });
+  it('The *commit* is done after trim', () => {
+    page.addTodo('Hello');
 
-    /** Should destroy on empty commit */
     cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(page.selectors.itemEditByIndex(0)).clear().type('{enter}');
+    cy.get(page.selectors.itemEditByIndex(0)).type(' World ').blur();
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello World');
+  });
+  it('If the trim results in an empty value, the commit should destroy the item', () => {
+    page.addTodo('Hello');
+
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).clear().blur();
     cy.get(page.selectors.itemLabelByIndex(0)).should('not.exist');
   });
+  it('Escape does not result in a commit', () => {
+    page.addTodo('Hello');
 
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).type(' World{esc}');
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello');
+  });
+});
+
+
+describe('todo mvc', () => {
   it('Counter', () => {
     /** 
      * Displays the number of active todos in a pluralized form. Make sure to pluralize the 'item' word correctly: '0 items', '1 item', '2 items'. Example: **2** items left

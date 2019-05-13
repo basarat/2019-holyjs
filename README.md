@@ -116,6 +116,8 @@ export const visit = () => {
 
 ### Spec 
 
+* The original spec has issues of leaky implementations. So here is one that is free from mentions on labels, and classnames.
+
 ```js
 `
 ### No todos
