@@ -233,36 +233,45 @@ describe.only('Clear completed button', () => {
   });
 });
 
+`
+# Routing
+The following routes should be implemented: 
+- "#/" (default) - all items are shown. The all link is selected
+- "#/active" - Only active items are shown. The active link is selected
+- "#/completed" - Only completed items are shown. The completed link is selected
 
-describe('todo mvc', () => {
-  it('Routing', () => {
-    /** 
-     * The following routes should be implemented: 
-     * '#/' (all - default), '#/active' and '#/completed'. 
-     * 
-     * When the route changes, the todo list should be filtered on a model level and the 'selected' class on the filter links should be toggled.
-     * 
-     * When an item is updated while in a filtered state, it should be updated accordingly. E.g. if the filter is 'Active' and the item is checked, it should be hidden.  
-     */
+Live filtering:
+- "#/active" - Items should move out if checked
+- "#/completed" - Items should move out if unchecked
+`
+
+describe.only('Routing', () => {
+  beforeEach(() => {
     page.addTodo('Completed');
     cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
     page.addTodo('InProgress');
-
-
-    /** All */
+  });
+  it('"#/" (default) - all items are shown. The all link is selected', () => {
     cy.get(page.selectors.all).should('have.class', 'selected');
-
-    /** Active */
+    page.getAllTodos().should('deep.equal', ['Completed', 'InProgress']);
+  });
+  it('"#/active" - Only active items are shown. The active link is selected', () => {
     cy.visit('#/active');
     cy.get(page.selectors.active).should('have.class', 'selected');
     page.getAllTodos().should('deep.equal', ['InProgress']);
-
-    /** Completed */
+  });
+  it('"#/completed" - Only completed items are shown. The completed link is selected', () => {
     cy.visit('#/completed');
     cy.get(page.selectors.completed).should('have.class', 'selected');
     page.getAllTodos().should('deep.equal', ['Completed']);
-
-    /** Should disappear if no longer matches active filter */
+  });
+  it('"#/active" - Items should move out if checked', () => {
+    cy.visit('#/active');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(page.selectors.itemLabelByIndex(0)).should('not.exist');
+  });
+  it('"#/completed" - Items should move out if unchecked', () => {
+    cy.visit('#/completed');
     cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
     cy.get(page.selectors.itemLabelByIndex(0)).should('not.exist');
   });
