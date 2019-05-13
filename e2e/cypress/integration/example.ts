@@ -1,11 +1,11 @@
 /// <reference types="cypress"/>
 
 import { startServer } from "../utils/server";
-import { addTodo, visit, selectors, getAllTodos } from "../utils/pages/todoPage";
+import * as page from "../utils/pages/todoPage";
 
 beforeEach(() => {
   startServer();
-  visit();
+  page.visit();
 })
 
 describe('todo mvc', () => {
@@ -23,10 +23,10 @@ describe('todo mvc', () => {
      * Make sure to '.trim()' the input and then check that it's not empty before creating a new todo. 
      */
 
-    cy.focused().should('have.class', selectors.newTodoInput.substr(1));
+    cy.focused().should('have.class', page.selectors.newTodoInput.substr(1));
 
-    cy.get(selectors.newTodoInput).type('Hello world  ').type('{enter}');
-    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'Hello world');
+    cy.get(page.selectors.newTodoInput).type('Hello world  ').type('{enter}');
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello world');
   });
 
   it('Mark all as complete', () => {
@@ -37,32 +37,32 @@ describe('todo mvc', () => {
      */
 
     // Initial state
-    cy.get(selectors.toggleAllCheckbox).should('not.be.visible');
+    cy.get(page.selectors.toggleAllCheckbox).should('not.be.visible');
 
     // When nothing is checked 
-    addTodo('Hello');
-    addTodo('World');
-    cy.get(selectors.toggleAllCheckbox).should('not.be.checked');
+    page.addTodo('Hello');
+    page.addTodo('World');
+    cy.get(page.selectors.toggleAllCheckbox).should('not.be.checked');
 
     // When there is a mix of checked and not checked items
-    cy.get(selectors.itemCheckBoxByIndex(0)).click();
-    cy.get(selectors.toggleAllCheckbox).should('not.be.checked');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(page.selectors.toggleAllCheckbox).should('not.be.checked');
 
     // When they are all checked
-    cy.get(selectors.itemCheckBoxByIndex(1)).click();
-    cy.get(selectors.toggleAllCheckbox).should('be.checked');
+    cy.get(page.selectors.itemCheckBoxByIndex(1)).click();
+    cy.get(page.selectors.toggleAllCheckbox).should('be.checked');
 
     // When toggle all is in checked state and clicked
-    cy.get(selectors.toggleAllCheckbox).click();
-    cy.get(selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
-    cy.get(selectors.itemCheckBoxByIndex(1)).should('not.be.checked');
-    cy.get(selectors.toggleAllCheckbox).should('not.be.checked');
+    cy.get(page.selectors.toggleAllCheckbox).click();
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
+    cy.get(page.selectors.itemCheckBoxByIndex(1)).should('not.be.checked');
+    cy.get(page.selectors.toggleAllCheckbox).should('not.be.checked');
 
     // When toggle all is not in checked state and clicked
-    cy.get(selectors.toggleAllCheckbox).click();
-    cy.get(selectors.itemCheckBoxByIndex(0)).should('be.checked');
-    cy.get(selectors.itemCheckBoxByIndex(1)).should('be.checked');
-    cy.get(selectors.toggleAllCheckbox).should('be.checked');
+    cy.get(page.selectors.toggleAllCheckbox).click();
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('be.checked');
+    cy.get(page.selectors.itemCheckBoxByIndex(1)).should('be.checked');
+    cy.get(page.selectors.toggleAllCheckbox).should('be.checked');
   });
 
   it('Item', () => {
@@ -74,14 +74,14 @@ describe('todo mvc', () => {
 
 
     // Checked state
-    addTodo('Hello World');
-    cy.get(selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
-    cy.get(selectors.itemCheckBoxByIndex(0)).click();
-    cy.get(selectors.itemCheckBoxByIndex(0)).should('be.checked');
+    page.addTodo('Hello World');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('be.checked');
 
 
     // Destruction
-    cy.get(selectors.itemDestroyByIndex(0)).invoke('show').click();
+    cy.get(page.selectors.itemDestroyByIndex(0)).invoke('show').click();
     cy.get('Hello World').should('not.exist');
   });
 
@@ -96,52 +96,52 @@ describe('todo mvc', () => {
      * If escape is pressed during the edit, the edit state should be left and any changes be discarded.
      */
 
-    addTodo('Hello');
+    page.addTodo('Hello');
 
     /** Should enter and exit edit mode */
-    cy.get(selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(selectors.itemEditByIndex(0)).should('exist').blur().should('not.exist');
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).should('exist').blur().should('not.exist');
 
     /** Should commit on blur */
-    cy.get(selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(selectors.itemEditByIndex(0)).clear().type('World').blur();
-    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'World');
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).clear().type('World').blur();
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'World');
 
     /** Should commit on enter */
-    cy.get(selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(selectors.itemEditByIndex(0)).clear().type('Again{enter}');
-    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'Again');
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).clear().type('Again{enter}');
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Again');
 
     /** Should not commit on escape */
-    cy.get(selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(selectors.itemEditByIndex(0)).clear().type('Hello{enter}')
-    cy.get(selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(selectors.itemEditByIndex(0)).clear().type('Ignored{esc}');
-    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'Hello');
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).clear().type('Hello{enter}')
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).clear().type('Ignored{esc}');
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello');
 
     /** Should commit without spaces */
-    cy.get(selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(selectors.itemEditByIndex(0)).clear().type(' Hello ').blur();
-    cy.get(selectors.itemLabelByIndex(0)).should('have.text', 'Hello');
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).clear().type(' Hello ').blur();
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello');
 
     /** Should destroy on empty commit */
-    cy.get(selectors.itemLabelByIndex(0)).dblclick();
-    cy.get(selectors.itemEditByIndex(0)).clear().type('{enter}');
-    cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
+    cy.get(page.selectors.itemLabelByIndex(0)).dblclick();
+    cy.get(page.selectors.itemEditByIndex(0)).clear().type('{enter}');
+    cy.get(page.selectors.itemLabelByIndex(0)).should('not.exist');
   });
 
   it('Counter', () => {
     /** 
      * Displays the number of active todos in a pluralized form. Make sure to pluralize the 'item' word correctly: '0 items', '1 item', '2 items'. Example: **2** items left
      */
-    addTodo('Hello World');
-    cy.get(selectors.todoCount).should('have.text', '1 item left');
+    page.addTodo('Hello World');
+    cy.get(page.selectors.todoCount).should('have.text', '1 item left');
 
-    addTodo('Again');
-    cy.get(selectors.todoCount).should('have.text', '2 items left');
+    page.addTodo('Again');
+    cy.get(page.selectors.todoCount).should('have.text', '2 items left');
 
-    cy.get(selectors.toggleAllCheckbox).click();
-    cy.get(selectors.todoCount).should('have.text', '0 items left');
+    cy.get(page.selectors.toggleAllCheckbox).click();
+    cy.get(page.selectors.todoCount).should('have.text', '0 items left');
   });
 
   it('Clear completed button', () => {
@@ -149,13 +149,13 @@ describe('todo mvc', () => {
      * Should be hidden when there are no completed todos.
      * Removes completed todos when clicked. 
      */
-    cy.get(selectors.clearCompleted).should('not.exist');
-    addTodo('Again');
-    cy.get(selectors.itemCheckBoxByIndex(0)).click();
-    cy.get(selectors.clearCompleted).should('be.visible');
+    cy.get(page.selectors.clearCompleted).should('not.exist');
+    page.addTodo('Again');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(page.selectors.clearCompleted).should('be.visible');
 
-    cy.get(selectors.clearCompleted).click();
-    cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
+    cy.get(page.selectors.clearCompleted).click();
+    cy.get(page.selectors.itemLabelByIndex(0)).should('not.exist');
   });
 
   it('Routing', () => {
@@ -167,26 +167,26 @@ describe('todo mvc', () => {
      * 
      * When an item is updated while in a filtered state, it should be updated accordingly. E.g. if the filter is 'Active' and the item is checked, it should be hidden.  
      */
-    addTodo('Completed');
-    cy.get(selectors.itemCheckBoxByIndex(0)).click();
-    addTodo('InProgress');
+    page.addTodo('Completed');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
+    page.addTodo('InProgress');
 
 
     /** All */
-    cy.get(selectors.all).should('have.class', 'selected');
+    cy.get(page.selectors.all).should('have.class', 'selected');
 
     /** Active */
     cy.visit('#/active');
-    cy.get(selectors.active).should('have.class', 'selected');
-    getAllTodos().should('deep.equal', ['InProgress']);
+    cy.get(page.selectors.active).should('have.class', 'selected');
+    page.getAllTodos().should('deep.equal', ['InProgress']);
 
     /** Completed */
     cy.visit('#/completed');
-    cy.get(selectors.completed).should('have.class', 'selected');
-    getAllTodos().should('deep.equal', ['Completed']);
+    cy.get(page.selectors.completed).should('have.class', 'selected');
+    page.getAllTodos().should('deep.equal', ['Completed']);
 
     /** Should disappear if no longer matches active filter */
-    cy.get(selectors.itemCheckBoxByIndex(0)).click();
-    cy.get(selectors.itemLabelByIndex(0)).should('not.exist');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(page.selectors.itemLabelByIndex(0)).should('not.exist');
   });
 });

@@ -1,7 +1,8 @@
 # Maintainable web application testing with cypress
 > Testing how it should be
 
-Docs / Code to an accompanying video course on cypress web application testing.
+https://docs.google.com/presentation/d/1GkosEbTLBNZM4n9g9FXDBsSTl1D2IzcHePplTZ3PRwI/edit?usp=sharing
+
 
 ## Setup 
 Setup the `webapp`: 
