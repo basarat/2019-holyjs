@@ -49,43 +49,57 @@ describe('New todo', () => {
   });
 });
 
-describe('todo mvc', () => {
-  it('Mark all as complete', () => {
-    /** 
-     * This checkbox toggles all the todos to the same state as itself. 
-     * Make sure to clear the checked state after the "Clear completed" button is clicked. 
-     * The "Mark all as complete" checkbox should also be updated when single todo items are checked/unchecked. Eg. When all the todos are checked it should also get checked.
-     */
+`
+# Make all as complete
+- Should not be visible when there are no todos.
+- If any todo is not complete it should not be checked.
+- When all the todos are checked it should also get checked.
 
-    // Initial state
+This checkbox toggles all the todos to the same state as itself. 
+- When clicked, If it is not checked, it checks all todos.
+- When clicked, If it is checked, it unchecks all todos.
+`
+describe.only('Mark all as complete', () => {
+  it('should not be visible when there are no todos', () => {
     cy.get(page.selectors.toggleAllCheckbox).should('not.be.visible');
-
-    // When nothing is checked 
+  });
+  it('If any todo is not complete it should not be checked.', () => {
     page.addTodo('Hello');
     page.addTodo('World');
+    /** When nothing is checked */
     cy.get(page.selectors.toggleAllCheckbox).should('not.be.checked');
-
-    // When there is a mix of checked and not checked items
+    /** When mixed */
     cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
     cy.get(page.selectors.toggleAllCheckbox).should('not.be.checked');
-
-    // When they are all checked
+  });
+  it('When all the todos are checked it should also get checked.', () => {
+    page.addTodo('Hello');
+    page.addTodo('World');
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
     cy.get(page.selectors.itemCheckBoxByIndex(1)).click();
     cy.get(page.selectors.toggleAllCheckbox).should('be.checked');
+  });
+  it('This checkbox toggles all the todos to the same state as itself', () => {
+    page.addTodo('Hello');
+    page.addTodo('World');
 
-    // When toggle all is in checked state and clicked
-    cy.get(page.selectors.toggleAllCheckbox).click();
-    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
-    cy.get(page.selectors.itemCheckBoxByIndex(1)).should('not.be.checked');
-    cy.get(page.selectors.toggleAllCheckbox).should('not.be.checked');
-
-    // When toggle all is not in checked state and clicked
+    /** When clicked, If it is not checked, it checks all todos. */
     cy.get(page.selectors.toggleAllCheckbox).click();
     cy.get(page.selectors.itemCheckBoxByIndex(0)).should('be.checked');
     cy.get(page.selectors.itemCheckBoxByIndex(1)).should('be.checked');
     cy.get(page.selectors.toggleAllCheckbox).should('be.checked');
-  });
 
+    /** When clicked, If it is checked, it unchecks all todos. */
+    cy.get(page.selectors.toggleAllCheckbox).click();
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).should('not.be.checked');
+    cy.get(page.selectors.itemCheckBoxByIndex(1)).should('not.be.checked');
+    cy.get(page.selectors.toggleAllCheckbox).should('not.be.checked');
+  });
+  
+});
+
+
+describe('todo mvc', () => {
   it('Item', () => {
     /** 
      * A todo item has three possible interactions:
