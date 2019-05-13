@@ -188,12 +188,16 @@ describe('Edit item', () => {
   });
 });
 
-
-describe('todo mvc', () => {
-  it('Counter', () => {
-    /** 
-     * Displays the number of active todos in a pluralized form. Make sure to pluralize the 'item' word correctly: '0 items', '1 item', '2 items'. Example: **2** items left
-     */
+`
+# Counter
+- Is not displayed when there are no items
+- Displays the number of active todos in a pluralized form e.g. "0 items left", "1 item left", "2 items left"
+`
+describe.only('Counter', () => {
+  it('Is not displayed when there are no items', () => {
+    cy.get(page.selectors.todoCount).should('not.exist');
+  });
+  it('Displays the number of active todos in a pluralized form e.g. "0 items left", "1 item left", "2 items left"', () => {
     page.addTodo('Hello World');
     cy.get(page.selectors.todoCount).should('have.text', '1 item left');
 
@@ -203,7 +207,9 @@ describe('todo mvc', () => {
     cy.get(page.selectors.toggleAllCheckbox).click();
     cy.get(page.selectors.todoCount).should('have.text', '0 items left');
   });
+});
 
+describe('todo mvc', () => {
   it('Clear completed button', () => {
     /** 
      * Should be hidden when there are no completed todos.
