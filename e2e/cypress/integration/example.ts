@@ -6,29 +6,46 @@ import * as page from "../utils/pages/todoPage";
 beforeEach(() => {
   startServer();
   page.visit();
-})
+});
 
-describe('todo mvc', () => {
-  it('No todos', () => {
-    /** When there are no todos, '#main' and '#footer' should be hidden. */
+`
+# No todos
+- When there are no todos, the main list and the footer should be hidden.
+`
+describe('No todos', () => {
+  it('The main list and footer should be hidden', () => {
     cy.get('#main').should('not.be.visible');
     cy.get('#footer').should('not.be.visible');
   });
+});
 
-  it('New todo', () => {
-    /** 
-     * New todos are entered in the input at the top of the app. 
-     * The input element should be focused when the page is loaded, preferably by using the 'autofocus' input attribute. 
-     * Pressing Enter creates the todo, appends it to the todo list, and clears the input. 
-     * Make sure to '.trim()' the input and then check that it's not empty before creating a new todo. 
-     */
+`
+# New todo
+- The input element should be focused when the page is loaded. 
+- New todos are entered in the input at the top of the app. 
+- Pressing Enter creates the todo, appends it to the todo list, and clears the input. 
+- Make sure to '.trim()' the input and then check that it's not empty before creating a new todo. 
+`
 
+describe('New todo', () => {
+  it('The input element should be focused when the page is loaded.', () => {
     cy.focused().should('have.class', page.selectors.newTodoInput.substr(1));
-
-    cy.get(page.selectors.newTodoInput).type('Hello world  ').type('{enter}');
+  });
+  it('Create by enter', () => {
+    cy.get(page.selectors.newTodoInput).type('Hello world').type('{enter}');
     cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello world');
   });
+  it('Trim before adding', () => {
+    cy.get(page.selectors.newTodoInput).type(' Hello world ').type('{enter}');
+    cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello world');
+  });
+  it('Don\'t create if empty', () => {
+    cy.get(page.selectors.newTodoInput).type('  ').type('{enter}');
+    cy.get(page.selectors.itemLabelByIndex(0)).should('not.exist');
+  });
+});
 
+describe('todo mvc', () => {
   it('Mark all as complete', () => {
     /** 
      * This checkbox toggles all the todos to the same state as itself. 
