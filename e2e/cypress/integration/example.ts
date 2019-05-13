@@ -31,9 +31,13 @@ describe('New todo', () => {
   it('The input element should be focused when the page is loaded.', () => {
     cy.focused().should('have.class', page.selectors.newTodoInput.substr(1));
   });
-  it('Create by enter', () => {
+  it('Create by enter, adds it to the list', () => {
     cy.get(page.selectors.newTodoInput).type('Hello world').type('{enter}');
     cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello world');
+  });
+  it('Empty input after adding', () => {
+    cy.get(page.selectors.newTodoInput).type('Hello world').type('{enter}');
+    cy.get(page.selectors.newTodoInput).should('have.text', '');
   });
   it('Trim before adding', () => {
     cy.get(page.selectors.newTodoInput).type(' Hello world ').type('{enter}');
