@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 
 describe('Example', () => {
-  beforeEach(() => {
+  it('Should work', () => {
     page.addTodo('one');
     page.addTodo('two');
 
