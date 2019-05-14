@@ -129,3 +129,12 @@ export const visit = () => {
 
 
 ## Write Specs 
+
+# NoTodos
+```ts
+  it('The main list and footer should be hidden', () => {
+    cy.get(page.selectors.mainList).should('not.be.visible');
+    cy.get(page.selectors.footer).should('not.be.visible');
+  });
+```
+

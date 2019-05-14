@@ -2,6 +2,9 @@ export const selectors = {
   newTodoInput: '.new-todo',
   toggleAllCheckbox: '.toggle-all',
 
+  mainList: '#main',
+  footer: '#footer',
+
   itemCheckBoxByIndex: (index: number) => `[data-test=item-toggle-${index}]`,
   itemLabelByIndex: (index: number) => `[data-test=item-label-${index}]`,
   itemDestroyByIndex: (index: number) => `[data-test=item-destroy-${index}]`,
