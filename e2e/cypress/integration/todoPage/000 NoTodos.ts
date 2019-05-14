@@ -10,7 +10,8 @@ beforeEach(() => {
 
 `
 # No todos
-- When there are no todos, the main list and the footer should be hidden.
+When there are no todos:
+- The main list and the footer should be hidden.
 `
 describe('No todos', () => {
   it('The main list and footer should be hidden', () => {

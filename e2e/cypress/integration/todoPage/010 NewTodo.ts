@@ -10,26 +10,27 @@ beforeEach(() => {
 
 `
 # New todo
-- The input element should be focused when the page is loaded. 
-- New todos are entered in the input at the top of the app. 
-- Pressing Enter creates the todo, appends it to the todo list, and clears the input. 
-- Make sure to '.trim()' the input and then check that it's not empty before creating a new todo. 
+- The input element should be focused when the page is loaded
+- Created by enter, adding it to the list
+- Clear input after adding
+- '.trim()' the input before adding
+- Do not create a todo if the result of trim is an empty string
 `
 
 describe('New todo', () => {
-  it('The input element should be focused when the page is loaded.', () => {
+  it('The input element should be focused when the page is loaded', () => {
 
   });
-  it('Create by enter, adds it to the list', () => {
+  it('Created by enter, adding it to the list', () => {
   
   });
-  it('Empty input after adding', () => {
+  it('Clear input after adding', () => {
   
   });
-  it('Trim before adding', () => {
+  it('`.trim` before adding', () => {
   
   });
-  it('Don\'t create if empty', () => {
+  it('Do not create a todo if the result of trim is an empty string', () => {
   
   });
 });

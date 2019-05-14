@@ -9,22 +9,22 @@
 
 # 010 NewTodo
 ```ts
-  it('The input element should be focused when the page is loaded.', () => {
+  it('The input element should be focused when the page is loaded', () => {
     cy.focused().should('have.class', page.classNames.newTodoInput);
   });
-  it('Create by enter, adds it to the list', () => {
+  it('Created by enter, adding it to the list', () => {
     cy.get(page.selectors.newTodoInput).type('Hello world').type('{enter}');
     cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello world');
   });
-  it('Empty input after adding', () => {
+  it('Clear input after adding', () => {
     cy.get(page.selectors.newTodoInput).type('Hello world').type('{enter}');
     cy.get(page.selectors.newTodoInput).should('have.value', '');
   });
-  it('Trim before adding', () => {
+  it('`.trim` before adding', () => {
     cy.get(page.selectors.newTodoInput).type(' Hello world ').type('{enter}');
     cy.get(page.selectors.itemLabelByIndex(0)).should('have.text', 'Hello world');
   });
-  it('Don\'t create if empty', () => {
+  it('Do not create a todo if the result of trim is an empty string', () => {
     cy.get(page.selectors.newTodoInput).type('  ').type('{enter}');
     cy.get(page.selectors.itemLabelByIndex(0)).should('not.exist');
   });
