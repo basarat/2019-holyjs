@@ -129,8 +129,3 @@ export const visit = () => {
 
 
 ## Write Specs 
-
-* Now convert the behaviours to tests.
-* Spec.md 
-* Converted to test files. 
-* Added code that works.
