@@ -215,7 +215,7 @@ describe('Counter', () => {
 - Should be visible when there are completed todos
 - Clicking it removes completed todos 
 `
-describe.only('Clear completed button', () => {
+describe('Clear completed button', () => {
   it('Should be hidden when there are no completed todos', () => {
     page.addTodo('Hello');
     cy.get(page.selectors.clearCompleted).should('not.exist');
@@ -245,7 +245,7 @@ Live filtering:
 - "#/completed" - Items should move out if unchecked
 `
 
-describe.only('Routing', () => {
+describe('Routing', () => {
   beforeEach(() => {
     page.addTodo('Completed');
     cy.get(page.selectors.itemCheckBoxByIndex(0)).click();

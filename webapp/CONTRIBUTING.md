@@ -8,10 +8,7 @@
 
 And visit `http://localhost:8080`
 
-# Contributing 
-Guidance on depdendencies: 
-* Transpiler:
-  * typescript
+# Depdendencies
 * Dev Frontend:
   * webpack 
   * webpack-dev-server
@@ -21,6 +18,7 @@ Guidance on depdendencies:
 * Dev Backend: 
   * ts-node-dev
 * Dev both: 
+  * typescript
   * concurrently
 * Exec frontend: 
   * react 
