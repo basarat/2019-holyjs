@@ -125,7 +125,12 @@ export const visit = () => {
 }
 ```
 
----- SLIDE -----
+---- SLIDE: Behaviour vs. spec  ----
+
+
 ## Write Specs 
 
 * Now convert the behaviours to tests.
+* Spec.md 
+* Converted to test files. 
+* Added code that works.
