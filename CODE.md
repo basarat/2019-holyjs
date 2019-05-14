@@ -1,5 +1,5 @@
 
-# NoTodos
+# 000 NoTodos
 ```ts
   it('The main list and footer should be hidden', () => {
     cy.get(page.selectors.mainList).should('not.be.visible');
@@ -7,7 +7,7 @@
   });
 ```
 
-# NewTodo
+# 010 NewTodo
 ```ts
   it('The input element should be focused when the page is loaded.', () => {
     cy.focused().should('have.class', page.selectors.newTodoInput.substr(1));
@@ -30,7 +30,7 @@
   });
 ```
 
-# Item
+# 020 Item
 ```ts
   it('Starts of unchecked', () => {
     page.addTodo('Hello World');
@@ -50,7 +50,7 @@
   });
 ```
 
-# Edit item
+# 030 Edit item
 ```ts
 it('Double-clicking the todo label activates editing mode', () => {
     page.addTodo('Hello');
@@ -106,9 +106,9 @@ it('Double-clicking the todo label activates editing mode', () => {
   });
 ```
 
-# Mark all as complete 
+# 040 Mark all as complete 
 ```ts
-it('should not be visible when there are no todos', () => {
+  it('should not be visible when there are no todos', () => {
     cy.get(page.selectors.toggleAllCheckbox).should('not.be.visible');
   });
   it('If any todo is not complete it should not be checked.', () => {
@@ -145,9 +145,9 @@ it('should not be visible when there are no todos', () => {
   });
 ```
 
-# Counter
+# 050 Counter
 ```ts
-it('Is not displayed when there are no items', () => {
+  it('Is not displayed when there are no items', () => {
     cy.get(page.selectors.todoCount).should('not.exist');
   });
   it('Displays the number of active todos in a pluralized form e.g. "0 items left", "1 item left", "2 items left"', () => {
@@ -162,7 +162,7 @@ it('Is not displayed when there are no items', () => {
   });
 ```
 
-# Clear Completed Button 
+# 060 Clear Completed Button 
 ```ts
  it('Should be hidden when there are no completed todos', () => {
     page.addTodo('Hello');
@@ -181,7 +181,7 @@ it('Is not displayed when there are no items', () => {
   });
 ```
 
-# Routing
+# 070 Routing
 ```ts
   beforeEach(() => {
     page.addTodo('Completed');
