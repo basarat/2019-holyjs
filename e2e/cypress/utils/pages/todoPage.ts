@@ -1,5 +1,9 @@
+export const classNames = {
+  newTodoInput: 'new-todo'
+}
+
 export const selectors = {
-  newTodoInput: '.new-todo',
+  newTodoInput: '.' + classNames.newTodoInput,
   toggleAllCheckbox: '.toggle-all',
 
   mainList: '#main',

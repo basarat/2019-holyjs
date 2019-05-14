@@ -18,7 +18,7 @@ beforeEach(() => {
 
 describe('New todo', () => {
   it('The input element should be focused when the page is loaded.', () => {
-    cy.focused().should('have.class', page.selectors.newTodoInput.substr(1));
+    cy.focused().should('have.class', page.classNames.newTodoInput);
   });
   it('Create by enter, adds it to the list', () => {
     cy.get(page.selectors.newTodoInput).type('Hello world').type('{enter}');
