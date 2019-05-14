@@ -18,18 +18,18 @@ beforeEach(() => {
 
 describe('New todo', () => {
   it('The input element should be focused when the page is loaded.', () => {
-    
+
   });
   it('Create by enter, adds it to the list', () => {
-    
+  
   });
   it('Empty input after adding', () => {
-    
+  
   });
   it('Trim before adding', () => {
-    
+  
   });
   it('Don\'t create if empty', () => {
-    
+  
   });
 });

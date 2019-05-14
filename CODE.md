@@ -18,7 +18,7 @@
   });
   it('Empty input after adding', () => {
     cy.get(page.selectors.newTodoInput).type('Hello world').type('{enter}');
-    cy.get(page.selectors.newTodoInput).should('have.text', '');
+    cy.get(page.selectors.newTodoInput).should('have.value', '');
   });
   it('Trim before adding', () => {
     cy.get(page.selectors.newTodoInput).type(' Hello world ').type('{enter}');
