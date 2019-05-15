@@ -19,7 +19,7 @@ This checkbox toggles all the todos to the same state as itself.
 - When clicked, If it is checked, it unchecks all todos.
 `
 describe('Toggle all', () => {
-  it('should not be visible when there are no todos', () => {
+  it('Should not be visible when there are no todos', () => {
     
   });
   it('If any todo is not complete it should not be checked.', () => {

@@ -98,7 +98,7 @@
 
 # 040 Toggle all
 ```ts
-  it('should not be visible when there are no todos', () => {
+  it('Should not be visible when there are no todos', () => {
     cy.get(page.selectors.toggleAllCheckbox).should('not.be.visible');
   });
   it('If any todo is not complete it should not be checked.', () => {
