@@ -29,16 +29,21 @@ Open localhost:8080
 ### Test runner 
 * Show the test runner 
   * Show package.json + deps + scripts, tsconfig.json, plugins/index.js, integration/example.ts
-  * `cy.visit('http://www.google.com')`
+  * `cy.visit('http://www.google.com');`
+  
+```ts
+    cy.visit('http://www.google.com');
+    cy.get('.gLFyf').type('Hello world{enter}');
+ ```
 
 ### Flake resistance
 * One big idea that makes it possible is the command - execution speration. 
 ```ts
-    console.log('start')
-    cy.visit('http://www.google.com')
-    console.log('between')
-    cy.get('.gLFyf').type('Hello world')
-    console.log('end')
+    console.log('start');
+    cy.visit('http://www.google.com');
+    console.log('between');
+    cy.get('.gLFyf').type('Hello world');
+    console.log('end');
 ```
 * Advantages 
   * Implicit retries. Notice the retry, and notice the error occurs in the get, not in a `.type` cannot be invoked on undefined. 
