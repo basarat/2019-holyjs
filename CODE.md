@@ -158,7 +158,7 @@
     page.addTodo('Hello');
     cy.get(page.selectors.clearCompleted).should('not.exist');
   });
-  it('Should be visible when there are no completed todos', () => {
+  it('Should be visible when there are completed todos', () => {
     page.addTodo('Hello');
     cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
     cy.get(page.selectors.clearCompleted).should('exist');
