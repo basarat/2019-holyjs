@@ -10,14 +10,14 @@ beforeEach(() => {
 
 `
 # Item
-- Starts of unchecked
+- Starts off unchecked
 - Clicking the checkbox toggles the todo active/complete
 - Clicking the remove button should remove it item
 `
 
 describe('Item', () => {
-  it('Starts of unchecked', () => {
-    
+  it('Starts off unchecked', () => {
+  
   });
   it('Clicking the checkbox toggles the todo active/complete', () => {
     

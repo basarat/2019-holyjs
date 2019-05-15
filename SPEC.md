@@ -8,7 +8,7 @@
 - Make sure to '.trim()' the input and then check that it's not empty before creating a new todo. 
 
 # Item
-- Starts of unchecked
+- Starts off unchecked
 - Clicking the checkbox toggles the todo active/complete
 - Clicking the remove button should remove it item
 
