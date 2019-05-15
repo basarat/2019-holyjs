@@ -76,6 +76,8 @@ Lets write our first test to see it in practice. We already have the application
   cy.visit('http://localhost:8080');
 ```
 
+* At this point writing clear dependable tests is problematic as the initial state of the applicaiton will vary depending upon the backend state.
+
 ----- SLIDE -------
 
 ### Removing backend dependency
