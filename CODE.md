@@ -96,7 +96,7 @@
   });
 ```
 
-# 040 Mark all as complete 
+# 040 Toggle all
 ```ts
   it('should not be visible when there are no todos', () => {
     cy.get(page.selectors.toggleAllCheckbox).should('not.be.visible');

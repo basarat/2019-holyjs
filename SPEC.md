@@ -21,7 +21,7 @@
 - If the trim results in an empty value, the commit should destroy the item
 - Escape does not result in a commit
 
-# Make all as complete
+# Toggle all
 - Should not be visible when there are no todos.
 - If any todo is not complete it should not be checked.
 - When all the todos are checked it should also get checked.
