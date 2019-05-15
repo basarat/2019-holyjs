@@ -58,34 +58,28 @@ Notice the autocomplete, and once again touch on our flake resistance notice tha
 * Show the app running 
   * Add, remove, mark as complete - filter. Preserved on reload.
 
------ SLIDE -------
-
-### Removing backend dependency
-One big concern for flake is how your application interacts with its surroundings. A conventional solution is to add stuff to your application code for alternate execution paths where perhaps you don't call the backend etc. 
-
-Cypress allows you to modify your applications external interactions without you needing to modify your application code. 
-
+## Test app 
 Lets write our first test to see it in practice. We already have the application running on 8080 and we can test that. 
 
 ```ts
-  cy.visit('http://localhost:8080')
+  cy.visit('http://localhost:8080');
 ```
 
+----- SLIDE -------
+
+### Removing backend dependency
 Notice that we start with some todos in there. Its not ideal, instead we should mock out the respose from this `get-all` api. See the response we are getting right now. And lets remove it starting a cypress `server`: 
 
 ```ts
   cy.server()
-    .route('GET', '/api/get-all', { todos: [] })
+    .route('GET', '/api/get-all', { todos: [] });
   // continue with cy.visit 
 ```
-And we can easily move it into its own file `utils/server.ts` file. And then call it in a `beforeEach` block in our tests. 
-
+We can move it to before each
 ```ts
-import { startServer } from "../utils/server";
-
 beforeEach(() => {
-  startServer();
-})
+  cy.server().route('GET', 'http://localhost:3000/api/get-all', { todos: [] });
+});
 ```
 
 ### Init backend dependency
@@ -93,11 +87,20 @@ beforeEach(() => {
 If we play around with the ui we see there are calls to `POST``/add` and `PUT``/set-all`. We could start mocking all of these all well and at that point you will be re-creating your backend. So think about it for a second and you will realize that the whole objective here is to ensure that the application starts in a known good state. So what you really want is `init` the server instead of starting to mock these out. 
 
 ```ts
-cy.request('PUT', 'http://localhost:3000/api/set-all', { todos: [] })
+cy.request('PUT', 'http://localhost:3000/api/set-all', { todos: [] });
 ```
 
-These are true E2E tests. Also equate to the "large" definition used by google https://testing.googleblog.com/2010/12/test-sizes.html
+These are true E2E tests. 
 
+And we can easily move it into its own file `utils/server.ts` file. And then call it in a `beforeEach` block in our tests. 
+
+```ts
+import { startServer } from "../utils/server";
+
+beforeEach(() => {
+  startServer();
+});
+```
 
 ----- SLIDE -------
 

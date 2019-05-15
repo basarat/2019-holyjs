@@ -1,10 +1,11 @@
 export const classNames = {
-  newTodoInput: 'new-todo'
+  newTodoInput: 'new-todo',
+  toggleAllCheckbox: 'toggle-all',
 }
 
 export const selectors = {
-  newTodoInput: '.' + classNames.newTodoInput,
-  toggleAllCheckbox: '.toggle-all',
+  newTodoInput: `.${classNames.newTodoInput}`,
+  toggleAllCheckbox: `.${classNames.toggleAllCheckbox}`,
 
   mainList: '#main',
   footer: '#footer',
