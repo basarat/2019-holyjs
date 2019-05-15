@@ -18,6 +18,9 @@ Setup `e2e`:
 Open up code: 
 * code .
 
+Open localhost:8080
+* open http://localhost:8080
+
 # Script 
 
 --- SLIDE --- 
