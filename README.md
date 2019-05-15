@@ -15,6 +15,9 @@ Setup `e2e`:
 * `npm install`
 * `npm start`
 
+Open up code: 
+* code .
+
 # Script 
 
 --- SLIDE --- 
