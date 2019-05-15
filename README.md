@@ -106,25 +106,26 @@ beforeEach(() => {
 
 
 ### Creating page objects 
+* Show playground to show css classes, selectors for links etc.
 * `cypress/utils/page/todoPage`
-
-* create selectors. Show playground selector for links at the bottom.
-* create actions
+* Selectors, actions.
 
 * add to test to show 
 ```ts
-  addTodo('one');
-  addTodo('two');
-
-  cy.contains('one');
-  cy.contains('two');
+beforeEach(() => {
+  startServer();
+  page.visit();  
+});
 ```
 
-* create and use `visit`.
+* Test : 
 ```ts
-export const visit = () => {
-  cy.visit('http://localhost:8080');
-}
+cy.get(page.selectors.newTodoInput).type('Hello world{enter}');
+```
+
+* Even better:
+```ts
+page.addTodo('Hello world');
 ```
 
 ---- SLIDE: Behaviour vs. spec  ----
