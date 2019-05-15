@@ -1,7 +1,8 @@
 export const classNames = {
   newTodoInput: 'new-todo',
   toggleAllCheckbox: 'toggle-all',
-}
+  selectedFilter: 'selected',
+};
 
 export const selectors = {
   newTodoInput: `.${classNames.newTodoInput}`,
@@ -22,15 +23,15 @@ export const selectors = {
   all: '[data-test=all]',
   active: '[data-test=active]',
   completed: '[data-test=completed]',
-}
+};
 
 export const visit = () => {
   cy.visit('http://localhost:8080');
-}
+};
 
 export const addTodo = (text: string) => {
   cy.get(selectors.newTodoInput).type(text).type('{enter}');
-}
+};
 
 export const getAllTodos = () => {
   return cy.get(selectors.todoListItems)
@@ -41,4 +42,4 @@ export const getAllTodos = () => {
       });
       return text;
     });
-}
+};
