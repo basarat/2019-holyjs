@@ -26,8 +26,7 @@ Setup `e2e`:
   * `cy.visit('http://www.google.com')`
 
 ### Flake resistance
-* I've mentioned that cypress tests are flake resistant. One big idea that makes it possible is the command - execution speration. 
-* insert console logs, run the test, see the console logs execute immediately. So its a two step process, one step to run the test, to note down the calls to cypress as commands that need executing. Next the runner goes ahead and runs them. 
+* One big idea that makes it possible is the command - execution speration. 
 ```ts
     console.log('start')
     cy.visit('http://www.google.com')
@@ -42,7 +41,7 @@ cy.get('.somethingelse').type('Hello world')
 ```
   * Second it allows you to write commands in a synchronous fashion even though they execute asynchronously, keeping you away from chaining hell or missed await calls.
 
-Also worth pointing out that the commands follow user interactions. E.g. `.type` inserts text like a user would do it, key by key, this also results in less flake.
+* Also worth pointing out commands follow user interactions. E.g. `.type` inserts text like a user would do it, key by key, this also results in less flake.
 
 ### Assertions (`should` command) and its arguments
 All assertions are done with the `should` command. 
