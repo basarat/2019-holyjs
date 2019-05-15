@@ -176,15 +176,15 @@
   beforeEach(() => {
     page.addTodo('Completed');
     cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
-    page.addTodo('InProgress');
+    page.addTodo('Active');
   });
   it('"#/" (default) - all items are shown. The all link is selected', () => {
-    page.getAllTodos().should('deep.equal', ['Completed', 'InProgress']);
+    page.getAllTodos().should('deep.equal', ['Completed', 'Active']);
     cy.get(page.selectors.all).should('have.class', page.classNames.selectedFilter);
   });
   it('"#/active" - Only active items are shown. The active link is selected', () => {
     cy.visit('#/active');
-    page.getAllTodos().should('deep.equal', ['InProgress']);
+    page.getAllTodos().should('deep.equal', ['Active']);
     cy.get(page.selectors.active).should('have.class', page.classNames.selectedFilter);
   });
   it('"#/completed" - Only completed items are shown. The completed link is selected', () => {
