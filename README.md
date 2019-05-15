@@ -1,10 +1,10 @@
 # Maintainable web application testing with cypress
 > Testing how it should be
 
+## Setup 
+Open slides: 
 https://docs.google.com/presentation/d/1GkosEbTLBNZM4n9g9FXDBsSTl1D2IzcHePplTZ3PRwI/edit?usp=sharing
 
-
-## Setup 
 Setup the `webapp`: 
 * cd webapp
 * `npm install`
