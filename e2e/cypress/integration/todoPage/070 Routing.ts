@@ -24,7 +24,7 @@ describe('Routing', () => {
   beforeEach(() => {
     page.addTodo('Completed');
     cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
-    page.addTodo('InProgress');
+    page.addTodo('Active');
   });
   it('"#/" (default) - all items are shown. The all link is selected', () => {
     
