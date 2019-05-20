@@ -37,6 +37,8 @@ Open localhost:8080
  ```
 
 ### Flake resistance
+* Worth pointing out commands follow user interactions. E.g. `.type` inserts text like a user would do it, key by key, this also results in less flake.
+
 * One big idea that makes it possible is the command - execution speration. 
 ```ts
     console.log('start');
@@ -52,7 +54,6 @@ cy.get('.somethingelse').type('Hello world')
 ```
   * Second it allows you to write commands in a synchronous fashion even though they execute asynchronously, keeping you away from chaining hell or missed await calls.
 
-* Also worth pointing out commands follow user interactions. E.g. `.type` inserts text like a user would do it, key by key, this also results in less flake.
 
 ### Assertions (`should` command) and its arguments
 All assertions are done with the `should` command. 
