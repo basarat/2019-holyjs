@@ -86,7 +86,7 @@ Notice that we start with some todos in there. Its not ideal, instead we should 
 
 ```ts
   cy.server()
-    .route('GET', '/api/get-all', { todos: [] });
+    .route('GET', 'http://localhost:3000/api/get-all', { todos: [] });
   // continue with cy.visit 
 ```
 We can move it to before each
