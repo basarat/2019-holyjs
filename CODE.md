@@ -142,12 +142,14 @@
   });
   it('Displays the number of active todos in a pluralized form e.g. "0 items left", "1 item left", "2 items left"', () => {
     page.addTodo('Hello World');
-    cy.get(page.selectors.todoCount).should('have.text', '1 item left');
-
     page.addTodo('Again');
+    
     cy.get(page.selectors.todoCount).should('have.text', '2 items left');
 
-    cy.get(page.selectors.toggleAllCheckbox).click();
+    cy.get(page.selectors.itemCheckBoxByIndex(0)).click();
+    cy.get(page.selectors.todoCount).should('have.text', '1 item left');
+    
+    cy.get(page.selectors.itemCheckBoxByIndex(1)).click();
     cy.get(page.selectors.todoCount).should('have.text', '0 items left');
   });
 ```
