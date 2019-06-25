@@ -9,7 +9,10 @@
       "es6"
     ],
     "jsx": "react",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "types": [
+      "cypress"
+    ]
   },
   "compileOnSave": false
 }

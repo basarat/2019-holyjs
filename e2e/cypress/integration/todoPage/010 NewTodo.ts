@@ -1,5 +1,3 @@
-/// <reference types="cypress"/>
-
 import { startServer } from "../../utils/server";
 import * as page from "../../utils/pages/todoPage";
 
