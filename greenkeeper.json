@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "e2e/package.json",
+        "webapp/package.json"
+      ]
+    }
+  }
+}
