@@ -1,4 +1,7 @@
 # Maintainable web application testing with cypress
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/basarat/2019-holyjs.svg)](https://greenkeeper.io/)
+
 > Testing how it should be
 
 ## Setup 
